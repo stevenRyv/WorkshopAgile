@@ -6,29 +6,35 @@ using UnityEngine.UI;
 
 public class PlayScript : MonoBehaviour {
 
+    private int count = 0;
+    private List<string> monsters = new List<string>() { "monster1", "monster2", "monster3", "monster4" };
 
-    //Make sure to attach these Buttons in the Inspector
-    public Button m_YourButton, m_YourSecondButton;
 
     // Use this for initialization
     void Start()
     {
-        Button btn = m_YourButton.GetComponent<Button>();
-        Button btn2 = m_YourSecondButton.GetComponent<Button>();
-        //Calls the TaskOnClick method when you click the Button
-        btn.onClick.AddListener(TaskOnClick);
-
-        m_YourSecondButton.onClick.AddListener(delegate { TaskWithParameters("Hello"); });
     }
-
-    private void TaskOnClick()
-    {
-        Debug.Log("You have clicked the button!");
-    }
-
+    
     // Update is called once per frame
-    void Update () {
-		
-	}
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            this.count++;
+            if(this.count >= monsters.Count)
+            {
+                this.count = 0;
+            }
+        }
+
+        if (count == 3)
+            ChangeMonster();
+    }
+
+    private void ChangeMonster()
+    {
+        GameObject.Find("Monster").GetComponent<Image>().sprite = Resources.Load<Sprite>("Monsters/" + monsters[count]);
+        Console.WriteLine(monsters[count]);
+    }
 
 }
