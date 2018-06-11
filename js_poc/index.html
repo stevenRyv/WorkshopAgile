@@ -73,8 +73,8 @@
 
         <div id="monster">
             <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10" style="width: 100%;">
-                    <span>10 / 10</span>
+                <div id="health-bar" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10" style="width: 100%;"> 
+                    <span id="health-text">10 / 10</span> 
                 </div>
             </div>
 
@@ -86,67 +86,69 @@
 
 
     <script type="text/javascript">
-        setInterval( function() { get_humeur(1); }, 1000 );
-        setInterval( function() { get_humeur(2); }, 1000 );
-
-        function get_humeur(machine) {
-            
-            var url = "phpmachine"+machine+".php";
-            var donnees = $('#donnees');
-
-            $.ajax({
-              type: "GET",
-              url: url,
-              data: donnees.serialize(), // serializes the form's elements.
-              contentType:"application/json; charset=utf-8",
-              dataType: "json",
-
-              beforeSend: function(){
-                
-              },
-              success: function(data)
-              {
-                 console.log("data : " + data);
-                 var humeur = data;
-                 var smiley = "";
-                 if(humeur >= 5) {
-                    smiley = "<i class='far fa-smile' style='color: green'></i>";
-                    $('#td_humeur_'+machine).attr( "class", "success");
-                 } else if (humeur >= 3 && humeur < 5) {
-                    smiley = "<i class='far fa-meh' style='color: orange'></i>";
-                    $('#td_humeur_'+machine).attr( "class", "");
-                 } else if (humeur >= 1 && humeur < 3) {
-                    smiley = "<i class='far fa-frown' style='color: red'></i>";
-                    $('#td_humeur_'+machine).attr( "class", "danger");
-                    $('#smiley_'+machine).effect( "shake", { direction: "left", times: 2, distance: 5});
-                    
-                    var start = new Date;
-                    setInterval(function() {
-                        $('#timer_'+machine).text((new Date - start) / 1000 + " Seconds");
-                    }, 1000);
-                 } else {
-                    smiley = "";
-                 }
-
-                 if(humeur == 0) {
-                    humeur = "";
-                    $('#td_humeur_'+machine).attr( "class", "");
-                    smiley = "<i class='far fa-times-circle'></i>";
-                 }
-
-                $("#humeur_"+machine).text(humeur);
-                $("#smiley_"+machine).html(smiley);
-              },
-              error : function(xhr, errorText){
-                 console.log(url);
-                 console.log('Error '+ xhr.responseText);
-              },
-              complete : function(data) {
-                
-
-              }
-            });
-        }
+        var maxHealth = 10; 
+        var health = maxHealth; 
+ 
+        $('#monster').on('click', function() { 
+            console.log("ça marche"); 
+ 
+            var elem = document.getElementById("health-bar"); 
+            var width = elem.style.width.slice(0, -1); 
+            health = health - 2; 
+            var nWidth = Math.floor(health * 100 / maxHealth); 
+ 
+            //clearInterval(id); 
+            document.getElementById("health-text").innerHTML = health + " / " + maxHealth; 
+            elem.style.width = width + '%'; 
+            document.getElementById("health-text").innerHTML = Math.floor(health / 100 * maxHealth) + " / " + maxHealth; 
+ 
+            //var id = setInterval(frame, 10); 
+ 
+            /*function frame() { 
+                if (width == nWidth) { 
+ 
+                } else if (width < nWidth) { 
+                    width++; 
+                    elem.style.width = width + '%'; 
+                    document.getElementById("health-text").innerHTML = Math.floor(width / 100 * maxHealth) + " / " + maxHealth; 
+                } else { 
+                    width--; 
+                    elem.style.width = width + '%'; 
+                    document.getElementById("health-text").innerHTML = Math.floor(width / 100 * maxHealth) + " / " + maxHealth; 
+                } 
+            }*/ 
+        }); 
+ 
+        /*setInterval( function() { get_humeur(1); }, 1000 ); 
+        setInterval( function() { get_humeur(2); }, 1000 );*/ 
+ 
+ 
+ 
+        /*move = function(damage) { 
+            var elem = document.getElementById("health-bar"); 
+            var width = elem.style.width.slice(0, -1); 
+            health = health - damage; 
+            var nWidth = Math.floor(health * 100 / maxHealth); 
+ 
+            var id = setInterval(frame, 10); 
+ 
+            function frame() { 
+                if (width == nWidth) { 
+                    clearInterval(id); 
+                    document.getElementById("health-text").innerHTML = health + " / " + maxHealth; 
+                } else if (width < nWidth) { 
+                    width++; 
+                    elem.style.width = width + '%'; 
+                    document.getElementById("health-text").innerHTML = Math.floor(width / 100 * maxHealth) + " / " + maxHealth; 
+                } else { 
+                    width--; 
+                    elem.style.width = width + '%'; 
+                    document.getElementById("health-text").innerHTML = Math.floor(width / 100 * maxHealth) + " / " + maxHealth; 
+                } 
+            } 
+        }; 
+ 
+        move(maxHealth);*/ 
         </script>
 
 
