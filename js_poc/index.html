@@ -144,6 +144,10 @@
 
             document.getElementById("health-text").innerHTML = health + " / " + maxHealth;
             healthBarElem.style.width = Math.floor(health * 100 / 100 * maxHealth) + '%';
+
+            //ajout du son au click sur monstre 
+            var audio = document.getElementById("audio"); 
+            audio.play(); 
         } 
 
         function DeadMonster()
@@ -151,6 +155,9 @@
             console.log("MONSTRE BATTU");
             $('#monster').prop("src", "../Monstres/coffin.png");
             $("#victory").css("visibility", "visible");
+
+            var audio = document.getElementById("audiodeath"); 
+            audio.play(); 
         }
 
         function GetXP()
@@ -162,6 +169,14 @@
 
         }
         </script>
+
+
+        //ajout du son au click sur monstre 
+            var audio = document.getElementById("audio"); 
+           audio.play(); 
+ 
+        <audio id="audio" src="../Music/punch.mp3"></audio> 
+        <audio id="audiodeath" src="../Music/death.mp3"></audio> 
 
 
 </body>
