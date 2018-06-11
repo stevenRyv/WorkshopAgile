@@ -116,28 +116,32 @@
 
         //Get required elements
         var healthBarElem = document.getElementById("health-bar"); 
-        var xpBarElem = document.getElementById("xp-bar"); 
+        var xpBarElem = document.getElementById("xp-bar");
+
+        //Game Initialisation 
+        Init();
 
         $('#monster').on('click', function() {
             console.log("1- health : " + health + " max health : " + maxHealth);
 
-            Init();
-
             HitMonster();
-
 
             if(health <= 0) {
                 GetXP();
                 DeadMonster();
             }
-
-            HitMonster();
         });
+
 
         function Init()
         {
+            //Init health bar
             document.getElementById("health-text").innerHTML = health + " / " + maxHealth;
-            healthBarElem.style.width = Math.floor(health / 100 * maxHealth) + '%';
+            healthBarElem.style.width = Math.floor( (health * 100) / maxHealth )   + '%';
+
+            //Init xp bar
+            document.getElementById("xp-text").innerHTML = heroXP + " / " + heroXPNextLevel;
+            xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
         }
 
         function HitMonster() 
