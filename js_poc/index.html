@@ -127,7 +127,7 @@
 
         $('#monster').on('click', function() {
             console.log("1- health : " + health + " max health : " + maxHealth);
-			$("#monster").effect("shake");
+			$("#monster").effect("shake");//shaking image of the monster if hit
             HitMonster();
 
             if(health <= 0) {
