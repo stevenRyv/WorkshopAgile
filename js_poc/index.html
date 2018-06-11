@@ -104,11 +104,7 @@
         $('#monster').on('click', function() {
             console.log("1- health : " + health + " max health : " + maxHealth);
 
-            var elem = document.getElementById("health-bar");
-            var width = elem.style.width.slice(0, -1);
-            health = health - 1;
-            console.log("2- health : " + health + " max health : " + maxHealth);
-            var nWidth = Math.floor(health * 100 / maxHealth);
+            HitMonster(heroStrength);
 
             //clearInterval(id);
             document.getElementById("health-text").innerHTML = health + " / " + maxHealth;
@@ -119,51 +115,21 @@
                 $('#monster').prop("src", "../Monstres/coffin.png");
                 $("#victory").css("visibility", "visible");
             }
-            //document.getElementById("health-bar").innerHTML = Math.floor(health / 100 * maxHealth) + " / " + maxHealth;
 
-            //var id = setInterval(frame, 10);
-
-            /*function frame() {
-                if (width == nWidth) {
-
-                } else if (width < nWidth) {
-                    width++;
-                    elem.style.width = width + '%';
-                    document.getElementById("health-text").innerHTML = Math.floor(width / 100 * maxHealth) + " / " + maxHealth;
-                } else {
-                    width--;
-                    elem.style.width = width + '%';
-                    document.getElementById("health-text").innerHTML = Math.floor(width / 100 * maxHealth) + " / " + maxHealth;
-                }
-            }*/
         });
 
 
-        /*move = function(damage) {
-            var elem = document.getElementById("health-bar");
-            var width = elem.style.width.slice(0, -1);
-            health = health - damage;
-            var nWidth = Math.floor(health * 100 / maxHealth);
+        function HitMonster(heroStrength) 
+        { 
+            var elem = document.getElementById("health-bar");  
+            var width = elem.style.width.slice(0, -1);  
+            health = health - heroStrength; 
+            console.log("2- health : " + health + " max health : " + maxHealth); 
+            var nWidth = Math.floor(health * 100 / maxHealth); 
 
-            var id = setInterval(frame, 10);
-
-            function frame() {
-                if (width == nWidth) {
-                    clearInterval(id);
-                    document.getElementById("health-text").innerHTML = health + " / " + maxHealth;
-                } else if (width < nWidth) {
-                    width++;
-                    elem.style.width = width + '%';
-                    document.getElementById("health-text").innerHTML = Math.floor(width / 100 * maxHealth) + " / " + maxHealth;
-                } else {
-                    width--;
-                    elem.style.width = width + '%';
-                    document.getElementById("health-text").innerHTML = Math.floor(width / 100 * maxHealth) + " / " + maxHealth;
-                }
-            }
-        };
-
-        move(maxHealth);*/
+            document.getElementById("health-text").innerHTML = health + " / " + maxHealth;
+            elem.style.width = Math.floor(health * 100 / 100 * maxHealth) + '%';
+        } 
         </script>
 
 
