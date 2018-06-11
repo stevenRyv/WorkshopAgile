@@ -64,7 +64,7 @@
                     <ul class="nav" id="side-menu">
                         
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>Accueil</a>
+                            <a href="Accueil.html"><i class="fa fa-dashboard fa-fw"></i>Accueil</a>
                         </li>
                     </ul>
                 </div>
@@ -103,9 +103,11 @@
 
 
     <script type="text/javascript">
+        //hero variables
         var heroStrength = 2;
         var heroXP = 0;
         var heroXPNextLevel = 5;
+        //monster variables
         var monsterXP = 5;
         var maxHealth = 10; 
         var health = 10;
@@ -132,7 +134,7 @@
             }
         });
 
-
+        //Initialisation of the game
         function Init()
         {
             //Init health bar
@@ -144,6 +146,7 @@
             xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
         }
 
+        //function for hit monster event
         function HitMonster() 
         {  
             var width = healthBarElem.style.width.slice(0, -1);  
@@ -159,23 +162,27 @@
             audio.play(); 
         } 
 
+        //function for monster killed
         function DeadMonster()
         {
+            //Display message
             console.log("MONSTRE BATTU");
             $('#monster').prop("src", "../Monstres/coffin.png");
             $("#victory").css("visibility", "visible");
 
+            //play dead sound
             var audio = document.getElementById("audiodeath"); 
             audio.play(); 
         }
 
         function GetXP()
         {
+            //Add monster xp to hero total xp
             heroXP =+ monsterXP;
 
+            //Update Hero XP bar 
             document.getElementById("xp-text").innerHTML = heroXP + " / " + heroXPNextLevel;
             xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
-
         }
 
         function makeNewPosition(){
@@ -199,10 +206,12 @@
             });
 
         }
-        </script>
          
-        <audio id="audio" src="../Music/punch.mp3"></audio> 
-        <audio id="audiodeath" src="../Music/death.mp3"></audio> 
+    </script>
+     
+    <!--Resources-->
+    <audio id="audio" src="../Music/punch.mp3"></audio> 
+    <audio id="audiodeath" src="../Music/death.mp3"></audio> 
 
 
 </body>
