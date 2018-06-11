@@ -75,10 +75,12 @@
     </div>
     <!-- /#wrapper -->
 
-    <div class="container" style="text-align: center; outline-style: solid;">
-        <h1>Combat</h1>
+    <div class="container" style="outline-style: solid;">
+        <div style="text-align: center;">
+            <h1>Combat</h1>
 
-        <h2 id="victory" style="visibility: hidden; color: green;">Vous avez battu le monstre !</h2>
+            <h2 id="victory" style="visibility: hidden; color: green;">Vous avez battu le monstre !</h2>
+        </div>
 
         <div >
             <div class="progress">
@@ -87,7 +89,7 @@
                 </div>
             </div>
 
-            <div id ="monster" class='a' style="outline-style: solid; height: 500px; width: 50%;  margin: 0 auto;">
+            <div class='monster-zone' style="outline-style: solid; height: 500px;">
                 <img  id="monster" src="../Monstres/monster4.png" style="width: 15%; position: relative;">
             </div>
             
@@ -189,11 +191,14 @@
         function makeNewPosition(){
 
             // Get viewport dimensions (remove the dimension of the div)
-            var h = $('.a').height() - 500;
-            var w = $('.a').width() - 500;
+            var h = $('.monster-zone').height() - 171;
+            var w = $('.monster-zone').width() - 171;
+            //console.log("h = " + h + " w = " + w);
 
+            // On définit la position aléatoire selon la taille de la div
             var nh = Math.floor(Math.random() * h);
             var nw = Math.floor(Math.random() * w);
+            //console.log("nh = " + nh + " nw = " + nw);
 
             return [nh,nw];
 
@@ -202,8 +207,12 @@
         function animateDiv(myclass){
             console.log("animate");
             var newq = makeNewPosition();
+            // Déplace le monstre jusqu' à la nouvelle position aléatoire tous les 1000 ms
             $(myclass).animate({ top: newq[0], left: newq[1] }, 1000,   function(){
-                animateDiv(myclass);
+                // Le monstre bouge tant qu'il est en vie
+                if(health > 0) {
+                    animateDiv(myclass);
+                }
             });
 
         }
