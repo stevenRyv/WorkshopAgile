@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <img  id="monster" src="/WorkshopAgile/Monstres/monster4.png" style="width: 20%;">
+            <img  id="monster" src="../Monstres/monster4.png" style="width: 20%;">
         </div>
 
     </div>
@@ -86,17 +86,14 @@
 
 
     <script type="text/javascript">
+        var heroStrength = 1;
         var maxHealth = 10; 
         var health = 10;
  
         $('#monster').on('click', function() { 
             console.log("1- health : " + health + " max health : " + maxHealth);
  
-            var elem = document.getElementById("health-bar"); 
-            var width = elem.style.width.slice(0, -1); 
-            health = health - 2;
-            console.log("2- health : " + health + " max health : " + maxHealth);
-            var nWidth = Math.floor(health * 100 / maxHealth); 
+            HitMonster(heroStrength);
  
             //clearInterval(id); 
             document.getElementById("health-text").innerHTML = health + " / " + maxHealth; 
@@ -150,6 +147,15 @@
         }; 
  
         move(maxHealth);*/ 
+
+        function HitMonster(heroStrength)
+        {
+            var elem = document.getElementById("health-bar"); 
+            var width = elem.style.width.slice(0, -1); 
+            health = health - heroStrength;
+            console.log("2- health : " + health + " max health : " + maxHealth);
+            var nWidth = Math.floor(health * 100 / maxHealth); 
+        }
         </script>
 
 
