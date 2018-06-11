@@ -108,18 +108,13 @@
         $('#monster').on('click', function() {
             console.log("1- health : " + health + " max health : " + maxHealth);
 
-            HitMonster(heroStrength);
-
-            //clearInterval(id);
-            document.getElementById("health-text").innerHTML = health + " / " + maxHealth;
-            elem.style.width = Math.floor(health / 100 * maxHealth) + '%';
-
             if(health <= 0) {
                 console.log("MONSTRE BATTU");
                 $('#monster').prop("src", "../Monstres/coffin.png");
                 $("#victory").css("visibility", "visible");
             }
 
+            HitMonster(heroStrength);
         });
 
 
