@@ -91,7 +91,7 @@
                 </div>
             </div>
 
-            <div class='monster-zone' style="outline-style: solid; height: 348px; background-image: url('../Terrain/background.jpg');">
+            <div class='monster-zone' id ='monster-zone' style="outline-style: solid; height: 348px; background-image: url('../Terrain/background.jpg');">
                 <!-- cursor: url('epe.png'), auto; -> épée cursor on image -->
                 <img  id="monster" src="../Monstres/monster4.png" style="width: 15%; position: relative; cursor: url('epe.png'), auto;" >
             </div>
@@ -116,6 +116,7 @@
         var monsterXP = 5;
         var maxHealth = 10; 
         var health = 10;
+		var nbclick = 4;
 
         $(document).ready(function() {
             animateDiv('#monster');
@@ -137,7 +138,14 @@
                 GetXP();
                 DeadMonster();
             }
+		
         });
+		
+		$('#monster-zone').on('click', function(){
+		console.log(nbclick);
+			nbclick = 0;
+			console.log(nbclick);
+		});
 
         //Initialisation of the game
         function Init()
