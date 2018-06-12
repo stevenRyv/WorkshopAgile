@@ -36,6 +36,15 @@
             display: block;
             width: 100%;
         }
+
+        #monster {
+            position: relative; 
+            cursor: url("epe.png"), auto;
+        }
+
+        .monsterimg {
+            width: 15%;
+        }
     </style>
 
 
@@ -115,8 +124,8 @@
         var heroXPNextLevel = 5;
         //monster variables
         var monsterXP = 5;
-        var maxHealth = 10; 
-        var health = 10;
+        var maxHealth = 100; 
+        var health = 100;
 		var nbclick = 0;
 
         $(document).ready(function() {
@@ -134,7 +143,7 @@
             console.log("1- health : " + health + " max health : " + maxHealth);
 			$("#monster").effect("shake");//shaking image of the monster if hit
             HitMonster();
-			nbclick +=1
+			nbclick +=1;
 			console.log("nbclick = "+nbclick);
             if(health <= 0) {
                 GetXP();
@@ -178,6 +187,7 @@
 			if(nbclick >=5)
 			{
 				health = health - (heroStrength*2);
+                document.body.style.cursor = "axe.png";
 			}
 			else
 			{
@@ -203,7 +213,7 @@
         {
             //Display message
             console.log("MONSTRE BATTU");
-            $('#monster').prop("src", "../Monstres/coffin.png");
+            document.getElementById("monster").innerHTML = ('<img class="monsterimg" src="../Monstres/coffin.png">');
             $("#victory").css("visibility", "visible");
 
             //play dead sound
