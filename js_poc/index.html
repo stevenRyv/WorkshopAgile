@@ -109,7 +109,7 @@
 
     <script type="text/javascript">
         //hero variables
-        var heroStrength = 2;
+        var heroStrength = 1;
         var heroXP = 0;
         var heroXPNextLevel = 5;
         //monster variables
@@ -149,6 +149,10 @@
             //Init xp bar
             document.getElementById("xp-text").innerHTML = heroXP + " / " + heroXPNextLevel;
             xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
+			
+			//calculation of the heroStrength
+			heroStrength += Math.floor(heroXP/5);
+			
         }
 
         //function for hit monster event
@@ -189,6 +193,8 @@
             //Update Hero XP bar 
             document.getElementById("xp-text").innerHTML = heroXP + " / " + heroXPNextLevel;
             xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
+			
+			heroStrength += Math.floor(heroXP/5);//calculation of the new Strength
         }
 
         function makeNewPosition(){
