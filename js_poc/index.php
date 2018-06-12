@@ -124,7 +124,7 @@ if($_SESSION["connected"] = 0)
             <div class="progress" style="width:25%">
                 <div id="xp-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="5" style="width: 0%;"> 
                     <span id="xp-text"> <?php echo $_SESSION["xp"]; ?></span> 
-                    <span id="xpNextLevel-text"></span> 
+                    <span id="xpNextLevel-text" style="margin-left: 20px;">/5</span> 
                 </div>
             </div>
         </div>
@@ -147,9 +147,9 @@ if($_SESSION["connected"] = 0)
         var heroXP = 0;
         var heroXPNextLevel = 5;
         //monster variables
-        var monsterXP = 5;
-        var maxHealth = 10; 
-        var health = 10;
+        var monsterXP = 3;
+        var maxHealth = 20; 
+        var health = 20;
 		var nbclick = 0;
 
         $(document).ready(function() {
@@ -192,15 +192,17 @@ if($_SESSION["connected"] = 0)
             document.getElementById("health-text").innerHTML = health + " / " + maxHealth;
             healthBarElem.style.width = Math.floor( (health * 100) / maxHealth )   + '%';
 
-            //Init xp bar
-            xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
+            heroXPNextLevel = 5;
 
             //Get user xp
             heroXP = document.getElementById("xp-text").innerHTML;
+            heroXP = heroXP % heroXPNextLevel;
             console.log("xp hero = " + heroXP);
 
 			//calculation of the heroStrength
 			heroStrength += Math.floor(heroXP/5);
+            //Init xp bar
+            xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
 			
         }
 
@@ -245,12 +247,14 @@ if($_SESSION["connected"] = 0)
         function GetXP()
         {
             //Add monster xp to hero total xp
-            heroXP =+ monsterXP;
+            heroXP = (heroXP + monsterXP) % heroXPNextLevel;
 
             //Update Hero XP bar 
             xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
 			
 			heroStrength += Math.floor(heroXP/5);//calculation of the new Strength
+
+            document.getElementById("xp-text").innerHTML = heroXP;
         }
 
         function makeNewPosition(){
