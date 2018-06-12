@@ -1,30 +1,22 @@
+<?php session_start();
+?>
 <!DOCTYPE html>
-
-<!--Page d'accueil-->
 <html>
     <head>
         <meta charset="utf-8" />
         <title>Game</title>
-         
+
 	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     </head>
 
     <body>
-<<<<<<< Updated upstream
 		 <center><h1>Welcome to the game</h1></center>
 
 		 <div class="line" style="line-break: auto">
 	     <a href="PageConnection.php" class="btn btn-success">Lancer le jeu</a>
-		 <a href="remerciement/index.html" class="btn btn-info">Quitter le jeu</a>
+		 <a href="pageclose.html" class="btn btn-info">Quitter le jeu</a>
 		</div>
 
-=======
-	     <center><h1>Welcome to the game</h1></center>
-		 <!-- direction vers page du game -->
-	     <a href="index.html" class="btn btn-success">Lancer le jeu</a>
-	 
-	     <!--regles de game a respecter -->
->>>>>>> Stashed changes
 		<h3>Les règles du jeu :</h3>
 			 </br>
 			 </br>
@@ -38,17 +30,11 @@
 				<li>Règle 3.1 : Si vous ratez un coup, le compteur pour l'arme spéciale est remise à 0</li>
 			</ol></li>
 		</ol>
-		
 
-<<<<<<< Updated upstream
 		<img src="../Monstres/monstre1.png" alt="donatebtc!" style="position: absolute; margin-left: 40%;" 	>
 
 
      
-=======
-        <!-- quitter game -->
-     <a href="pageclose.html" class="btn btn-info">Quitter le jeu</a>
->>>>>>> Stashed changes
 
     </body>
 </html>

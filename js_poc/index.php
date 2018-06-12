@@ -1,3 +1,10 @@
+<?php session_start();
+
+if($_SESSION["connected"] = 0)
+{
+    header('Location: PageConnection.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +33,12 @@
 
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    <script type="text/javascript">
+
+        
+
+    </script>
+
     <style>
         .progress {
             position: relative;
@@ -35,6 +48,16 @@
             position: absolute;
             display: block;
             width: 100%;
+        }
+
+        #monster {
+            width: 100%;
+            position: relative; 
+            cursor: url("epe.png"), auto;
+        }
+
+        .monsterimg {
+            width: 15%;
         }
     </style>
 
@@ -55,7 +78,7 @@
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">Monster Fight</a>
+                <a class="navbar-brand" href="index.php">Monster Fight</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -65,7 +88,7 @@
                         
                         <li>
                             <!-- button to Acceuil -->
-                            <a href="Accueil.html"><i class="fa fa-dashboard fa-fw"></i>Accueil</a>
+                            <a href="Accueil.php"><i class="fa fa-dashboard fa-fw"></i>Accueil</a>
                         </li>
                     </ul>
                 </div>
@@ -91,9 +114,11 @@
                 </div>
             </div>
 
-            <div class='monster-zone' id ='monster-zone' style="outline-style: solid; height: 348px; background-image: url('../Terrain/background.jpg');">
-                <!-- cursor: url('epe.png'), auto; -> épée cursor on image -->
+            <div class='monster-zone' style="outline-style: solid; height: 348px; background-image: url('../Terrain/background.jpg');">
+                <div id ="monster"></div>   
+            <!--
                 <img  id="monster" src="../Monstres/monster4.png" style="width: 15%; position: relative; cursor: url('epe.png'), auto;" >
+            -->
             </div>
             
             <div class="progress" style="width:25%">
@@ -109,6 +134,14 @@
 
 
     <script type="text/javascript">
+
+        /* -- Choix aléatoire du monstre */
+        ImageArray = new Array();
+        ImageArray[0] = 'monstre1.png';
+        ImageArray[1] = 'monstre2.png';
+        ImageArray[2] = 'monstre3.png';
+        ImageArray[3] = 'monstre4.png';
+
         //hero variables
         var heroStrength = 1;
         var heroXP = 0;
@@ -120,8 +153,11 @@
 		var nbclick = 0;
 
         $(document).ready(function() {
+            getRandomImage();
             animateDiv('#monster');
         });
+
+
 
         //Get required elements
         var healthBarElem = document.getElementById("health-bar"); 
@@ -150,9 +186,6 @@
 		});
 
         //Initialisation of the game
-		//Init : Health bar
-		//Init : xp Bar
-		// Calculation : heroStrength
         function Init()
         {
             //Init health bar
@@ -160,18 +193,18 @@
             healthBarElem.style.width = Math.floor( (health * 100) / maxHealth )   + '%';
 
             //Init xp bar
-            document.getElementById("xp-text").innerHTML = heroXP + " / " + heroXPNextLevel;
             xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
-			
+
+            //Get user xp
+            heroXP = document.getElementById("xp-text").innerHTML;
+            console.log("xp hero = " + heroXP);
+
 			//calculation of the heroStrength
-			StrengthCalculation();
+			heroStrength += Math.floor(heroXP/5);
 			
         }
 
         //function for hit monster event
-		// Calculate heroe dammage
-		//decrease life of the monster
-		//play damage sound
         function HitMonster() 
         {  
             var width = healthBarElem.style.width.slice(0, -1); 
@@ -197,8 +230,6 @@
         } 
 
         //function for monster killed
-		//change the image to the death image
-		//play death sound
         function DeadMonster()
         {
             //Display message
@@ -211,25 +242,16 @@
             audio.play(); 
         }
 
-		// function to give xp to the heroe
-		//add xp to the bar
-		//add xp to the var
         function GetXP()
         {
             //Add monster xp to hero total xp
             heroXP =+ monsterXP;
 
             //Update Hero XP bar 
-            document.getElementById("xp-text").innerHTML = heroXP + " / " + heroXPNextLevel;
             xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
-			StrengthCalculation();
 			
-        }
-		
-		function StrengthCalculation()
-		{
 			heroStrength += Math.floor(heroXP/5);//calculation of the new Strength
-		}
+        }
 
         function makeNewPosition(){
 
@@ -258,6 +280,16 @@
                 }
             });
 
+        }
+
+        
+
+        console.log(ImageArray);
+
+        function getRandomImage() {
+            var num = Math.floor( Math.random() * 4);
+            var img = ImageArray[num];
+            document.getElementById("monster").innerHTML = ('<img class="monsterimg" src="' + '../Monstres/' + img + '">');
         }
          
     </script>

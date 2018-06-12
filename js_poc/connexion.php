@@ -24,7 +24,7 @@ if(isset($_POST["username"]) & isset($_POST["password"]))
         		$_SESSION["xp"] = $tab[2];
         		$_SESSION["connected"] = 1;
 
-				header('Location: Accueil.html');
+				header('Location: index.php');
         	}
 	    }
 	    fclose($handle);
