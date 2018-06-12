@@ -26,12 +26,6 @@
 
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <script type="text/javascript">
-
-        
-
-    </script>
-
     <style>
         .progress {
             position: relative;
@@ -41,16 +35,6 @@
             position: absolute;
             display: block;
             width: 100%;
-        }
-
-        #monster {
-            width: 100%;
-            position: relative; 
-            cursor: url("epe.png"), auto;
-        }
-
-        .monsterimg {
-            width: 15%;
         }
     </style>
 
@@ -107,11 +91,9 @@
                 </div>
             </div>
 
-            <div class='monster-zone' style="outline-style: solid; height: 348px; background-image: url('../Terrain/background.jpg');">
-                <div id ="monster"></div>   
-            <!--
+            <div class='monster-zone' id ='monster-zone' style="outline-style: solid; height: 348px; background-image: url('../Terrain/background.jpg');">
+                <!-- cursor: url('epe.png'), auto; -> épée cursor on image -->
                 <img  id="monster" src="../Monstres/monster4.png" style="width: 15%; position: relative; cursor: url('epe.png'), auto;" >
-            -->
             </div>
             
             <div class="progress" style="width:25%">
@@ -126,14 +108,6 @@
 
 
     <script type="text/javascript">
-
-        /* -- Choix aléatoire du monstre */
-        ImageArray = new Array();
-        ImageArray[0] = 'monstre1.png';
-        ImageArray[1] = 'monstre2.png';
-        ImageArray[2] = 'monstre3.png';
-        ImageArray[3] = 'monstre4.png';
-
         //hero variables
         var heroStrength = 1;
         var heroXP = 0;
@@ -145,11 +119,8 @@
 		var nbclick = 0;
 
         $(document).ready(function() {
-            getRandomImage();
             animateDiv('#monster');
         });
-
-
 
         //Get required elements
         var healthBarElem = document.getElementById("health-bar"); 
@@ -178,6 +149,9 @@
 		});
 
         //Initialisation of the game
+		//Init : Health bar
+		//Init : xp Bar
+		// Calculation : heroStrength
         function Init()
         {
             //Init health bar
@@ -189,11 +163,14 @@
             xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
 			
 			//calculation of the heroStrength
-			heroStrength += Math.floor(heroXP/5);
+			StrengthCalculation();
 			
         }
 
         //function for hit monster event
+		// Calculate heroe dammage
+		//decrease life of the monster
+		//play damage sound
         function HitMonster() 
         {  
             var width = healthBarElem.style.width.slice(0, -1); 
@@ -219,6 +196,8 @@
         } 
 
         //function for monster killed
+		//change the image to the death image
+		//play death sound
         function DeadMonster()
         {
             //Display message
@@ -231,6 +210,9 @@
             audio.play(); 
         }
 
+		// function to give xp to the heroe
+		//add xp to the bar
+		//add xp to the var
         function GetXP()
         {
             //Add monster xp to hero total xp
@@ -239,9 +221,14 @@
             //Update Hero XP bar 
             document.getElementById("xp-text").innerHTML = heroXP + " / " + heroXPNextLevel;
             xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
+			StrengthCalculation();
 			
-			heroStrength += Math.floor(heroXP/5);//calculation of the new Strength
         }
+		
+		function StrengthCalculation()
+		{
+			heroStrength += Math.floor(heroXP/5);//calculation of the new Strength
+		}
 
         function makeNewPosition(){
 
@@ -270,16 +257,6 @@
                 }
             });
 
-        }
-
-        
-
-        console.log(ImageArray);
-
-        function getRandomImage() {
-            var num = Math.floor( Math.random() * 4);
-            var img = ImageArray[num];
-            document.getElementById("monster").innerHTML = ('<img class="monsterimg" src="' + '../Monstres/' + img + '">');
         }
          
     </script>
