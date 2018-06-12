@@ -116,7 +116,7 @@
         var monsterXP = 5;
         var maxHealth = 10; 
         var health = 10;
-		var nbclick = 4;
+		var nbclick = 0;
 
         $(document).ready(function() {
             animateDiv('#monster');
@@ -133,7 +133,8 @@
             console.log("1- health : " + health + " max health : " + maxHealth);
 			$("#monster").effect("shake");//shaking image of the monster if hit
             HitMonster();
-
+			nbclick +=1
+			console.log("nbclick = "+nbclick);
             if(health <= 0) {
                 GetXP();
                 DeadMonster();
@@ -142,9 +143,9 @@
         });
 		
 		$('#monster-zone').on('click', function(){
-		console.log(nbclick);
+		console.log("nbclick = "+nbclick);
 			nbclick = 0;
-			console.log(nbclick);
+			console.log("nbclick = "+nbclick);
 		});
 
         //Initialisation of the game
