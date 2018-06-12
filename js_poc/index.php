@@ -186,6 +186,9 @@ if($_SESSION["connected"] = 0)
 		});
 
         //Initialisation of the game
+		//Init : Health bar
+		//Init : xp Bar
+		// Calculation : heroStrength
         function Init()
         {
             //Init health bar
@@ -200,11 +203,14 @@ if($_SESSION["connected"] = 0)
             console.log("xp hero = " + heroXP);
 
 			//calculation of the heroStrength
-			heroStrength += Math.floor(heroXP/5);
+			StrengthCalculation();
 			
         }
 
         //function for hit monster event
+		// Calculate heroe dammage
+		//decrease life of the monster
+		//play damage sound
         function HitMonster() 
         {  
             var width = healthBarElem.style.width.slice(0, -1); 
@@ -230,6 +236,8 @@ if($_SESSION["connected"] = 0)
         } 
 
         //function for monster killed
+		//change the image to the death image
+		//play death sound
         function DeadMonster()
         {
             //Display message
@@ -242,6 +250,9 @@ if($_SESSION["connected"] = 0)
             audio.play(); 
         }
 
+		// function to give xp to the heroe
+		//add xp to the bar
+		//add xp to the var
         function GetXP()
         {
             //Add monster xp to hero total xp
@@ -250,9 +261,14 @@ if($_SESSION["connected"] = 0)
             //Update Hero XP bar 
             xpBarElem.style.width = Math.floor((heroXP *100)/ heroXPNextLevel) + '%';
 			
-			heroStrength += Math.floor(heroXP/5);//calculation of the new Strength
+			StrengthCalculation();//calculation of the new Strength
         }
-
+		
+		//Calculate hero strength with xp
+		function StrengthCalculation()
+		{
+			heroStrength += Math.floor(heroXP/5);//calculation of the new Strength
+		}
         function makeNewPosition(){
 
             // Get viewport dimensions (remove the dimension of the div)
