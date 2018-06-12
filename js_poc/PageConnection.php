@@ -9,16 +9,16 @@
     -->
     <div class="container">
         <div class="card card-container" >
-            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"  />
             <p id="profile-name" class="profile-name-card"></p>
 
-            <form class="form-signin" action="connexion.php" method="get">
+            <form class="form-signin" action="connexion.php" method="post">
                 <span id="reauth-email" class="reauth-email"></span>
 
-                <input id="username" class="form-control" placeholder="Pseudo" value="user" required autofocus>
+                <input id="username" name="username" class="form-control" placeholder="Pseudo" value="user" required autofocus>
 
-                <input type="password" id="password" class="form-control" placeholder="Mot de passe" value="123" required>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Mot de passe" value="123" required>
 
                 <div id="remember" class="checkbox">
                 </div>
