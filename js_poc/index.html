@@ -167,8 +167,16 @@
         //function for hit monster event
         function HitMonster() 
         {  
-            var width = healthBarElem.style.width.slice(0, -1);  
-            health = health - heroStrength; 
+            var width = healthBarElem.style.width.slice(0, -1); 
+			if(nbclick >=5)
+			{
+				health = health - (heroStrength*2);
+			}
+			else
+			{
+				health = health - heroStrength;
+			}
+            
             console.log("2- health : " + health + " max health : " + maxHealth); 
             var nWidth = Math.floor(health * 100 / maxHealth); 
 
